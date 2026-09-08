@@ -1,4 +1,5 @@
-# Examen-n8n-Javier-Suarez𝖐𝖊𝖎𝖑𝖊𝖗 𝖘𝖊𝖇𝖆𝖘𝖙𝖎𝖆𝖓 𝖘𝖊𝖗𝖗𝖆𝖓𝖔 𝖗𝖔𝖘𝖆𝖑𝖊𝖘 // 𝕯𝖚𝖛𝖆𝖓 𝕾𝖙𝖊𝖛𝖊𝖓 𝕮𝖔𝖛𝖎𝖑𝖑𝖆 𝕽𝖔𝖑𝖔́𝖓 // 𝕵𝖆𝖛𝖎𝖊𝖗 𝕬𝖑𝖋𝖔𝖓𝖘𝖔 𝕾𝖚𝖆́𝖗𝖊𝖟 𝕯𝖚𝖆𝖗𝖙𝖊
+# Examen-n8n-
+𝕵𝖆𝖛𝖎𝖊𝖗 𝕬𝖑𝖋𝖔𝖓𝖘𝖔 𝕾𝖚𝖆́𝖗𝖊𝖟 𝕯𝖚𝖆𝖗𝖙𝖊
 
 ---
 
@@ -77,7 +78,7 @@ El sistema está dividido en flujos de trabajo independientes pero interconectad
 
 Gracias a esta arquitectura, el bot opera de manera autónoma las 24 horas del día, los 7 días de la semana, liberando a los equipos administrativos de tareas repetitivas y permitiéndoles centrarse en la atención al estudiante y la mejora continua del servicio.
 
-⏰ Update: Examen 1 — Escalamiento de tutorías sin confirmar
+## ⏰ Update: Examen 1 — Escalamiento de tutorías sin confirmar
 
 A pesar de que el sistema notifica automáticamente a estudiantes y tutores cuando se asigna una tutoría, en la práctica pueden ocurrir olvidos: una cita queda registrada con el estado Asignada y ninguna de las dos partes llega a confirmarla, quedando "atascada" en el sistema sin que nadie lo note.
 
@@ -94,13 +95,13 @@ Ese mensaje se envía por Telegram directamente al canal de coordinación acadé
 Gracias a este mecanismo, el sistema deja de depender únicamente de que las partes recuerden confirmar por su cuenta: ahora existe una capa de supervisión activa que corre en segundo plano las 24 horas, detectando silenciosamente cualquier cita que se esté quedando en el limbo.
 
 
-
+## Prueba exitosa en Telegram (el mensaje recibido).
 <img width="720" height="939" alt="image" src="https://github.com/user-attachments/assets/f04351fa-9a8d-4b42-b015-ee7d2a2ffd03" />
 
-
+## Nodos nuevos en el canvas de n8n.
 <img width="1600" height="800" alt="image" src="https://github.com/user-attachments/assets/389c7550-1cbb-43d3-87bf-3d9dad1ef524" />
 
-
+## Evidencia en Google Sheets (si el examen implicaba escribir datos).
 <img width="1258" height="957" alt="image" src="https://github.com/user-attachments/assets/b74a5c57-bf06-4bd6-af82-c8aad232dd79" />
 
 
