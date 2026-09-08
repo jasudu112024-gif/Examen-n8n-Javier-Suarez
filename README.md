@@ -77,6 +77,31 @@ El sistema está dividido en flujos de trabajo independientes pero interconectad
 
 Gracias a esta arquitectura, el bot opera de manera autónoma las 24 horas del día, los 7 días de la semana, liberando a los equipos administrativos de tareas repetitivas y permitiéndoles centrarse en la atención al estudiante y la mejora continua del servicio.
 
+⏰ Update: Examen 1 — Escalamiento de tutorías sin confirmar
+
+A pesar de que el sistema notifica automáticamente a estudiantes y tutores cuando se asigna una tutoría, en la práctica pueden ocurrir olvidos: una cita queda registrada con el estado Asignada y ninguna de las dos partes llega a confirmarla, quedando "atascada" en el sistema sin que nadie lo note.
+
+Para resolver esto, se añadió un flujo de trabajo independiente al bot principal, enfocado exclusivamente en vigilar el estado de las tutorías por tiempo, sin necesidad de que un estudiante escriba nada por Telegram.
+
+Cada 30 minutos, un nodo Schedule Trigger despierta el flujo y consulta la hoja TUTORIAS completa. A partir de ahí, un nodo de filtrado se queda únicamente con aquellas tutorías que cumplen dos condiciones a la vez: que su estado siga siendo Asignada y que hayan transcurrido más de 45 minutos desde su fecha_creacion. Si no hay ninguna tutoría en esa situación, el flujo simplemente termina ahí sin generar ruido innecesario.
+
+Cuando sí se detectan casos atascados, un nodo de código recopila todos los identificadores de las tutorías afectadas y construye un mensaje único, sin importar si es una o varias:
+
+🚨 ATENCIÓN: Las siguientes tutorías llevan más de 45 min sin confirmar: [ID1, ID2...]. Favor verificar con el tutor/estudiante.
+
+Ese mensaje se envía por Telegram directamente al canal de coordinación académica, permitiendo que el equipo humano intervenga a tiempo, contacte al tutor o al estudiante, y evite que la tutoría se pierda por simple falta de confirmación.
+
+Gracias a este mecanismo, el sistema deja de depender únicamente de que las partes recuerden confirmar por su cuenta: ahora existe una capa de supervisión activa que corre en segundo plano las 24 horas, detectando silenciosamente cualquier cita que se esté quedando en el limbo.
+
+
+
+<img width="720" height="939" alt="image" src="https://github.com/user-attachments/assets/f04351fa-9a8d-4b42-b015-ee7d2a2ffd03" />
+
+
+<img width="1600" height="800" alt="image" src="https://github.com/user-attachments/assets/389c7550-1cbb-43d3-87bf-3d9dad1ef524" />
+
+
+<img width="1258" height="957" alt="image" src="https://github.com/user-attachments/assets/b74a5c57-bf06-4bd6-af82-c8aad232dd79" />
 
 
 # Base de Datos
