@@ -96,7 +96,7 @@ Gracias a este mecanismo, el sistema deja de depender únicamente de que las par
 
 
 ## Prueba exitosa en Telegram (el mensaje recibido).
-<img width="720" height="939" alt="image" src="https://github.com/user-attachments/assets/f04351fa-9a8d-4b42-b015-ee7d2a2ffd03" />
+<img width="720" height="849" alt="image" src="https://github.com/user-attachments/assets/9fcee428-3be4-40c2-9277-fb0a961dca2c" />
 
 ## Nodos nuevos en el canvas de n8n.
 <img width="1600" height="800" alt="image" src="https://github.com/user-attachments/assets/389c7550-1cbb-43d3-87bf-3d9dad1ef524" />
