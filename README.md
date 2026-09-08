@@ -106,4 +106,4 @@ Gracias a este mecanismo, el sistema deja de depender únicamente de que las par
 
 
 # Base de Datos
-https://docs.google.com/spreadsheets/d/1ygecuB-AFm5T9iG6Zghjd1ZEgsOSn319E1gFcsksZKs/edit?usp=sharing
+[https://docs.google.com/spreadsheets/d/1ygecuB-AFm5T9iG6Zghjd1ZEgsOSn319E1gFcsksZKs/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1soCn3n1k1tT4jxU8X1y-VSoBr5c57X0Qx9-2JTpVY2A/edit?usp=sharing)
