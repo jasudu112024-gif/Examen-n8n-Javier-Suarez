@@ -1,0 +1,193 @@
+{
+  "name": "TutorBot - 7. Escalamiento Tutorías sin Confirmar",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 10
+            }
+          ]
+        }
+      },
+      "id": "9b5976fb-9de4-44cd-b0e6-a0f8faf5b1f0",
+      "name": "Schedule Trigger - Cada 30 min1",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        1616,
+        -176
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "cond-estado",
+              "leftValue": "={{ $json.estado }}",
+              "rightValue": "Asignada",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "cond-tiempo",
+              "leftValue": "={{ $json.fecha_creacion }}",
+              "rightValue": "={{ $now.minus({ minutes: 45 }).toISO() }}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "before"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "f6688fd9-f6ed-499b-a517-eb6b7b376354",
+      "name": "Filter - Asignadas +45min1",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [
+        2064,
+        -176
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Agrupa todas las IDs de tutorías atascadas en un solo mensaje\nconst items = $input.all();\n\nif (items.length === 0) {\n  // No hay tutorías retrasadas: no se pasa nada al nodo de Telegram\n  return [];\n}\n\nconst ids = items.map(item => item.json.id_tutoria).join(', ');\n\nreturn [{\n  json: {\n    total_atascadas: items.length,\n    ids_atascadas: ids,\n    mensaje_alerta: `🚨 ATENCIÓN: Las siguientes tutorías llevan más de 45 min sin confirmar: [${ids}]. Favor verificar con el tutor/estudiante.`\n  }\n}];"
+      },
+      "id": "2c76487d-ec95-43af-b102-93f15c35d212",
+      "name": "Code - Formatear Lista IDs Atascadas1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2304,
+        -176
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "6214836204",
+        "text": "={{ $json.mensaje_alerta }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "id": "489ed78e-d2db-4b6e-9cc9-ecbfbf4aeaa3",
+      "name": "Telegram - Alerta a Coordinación1",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2496,
+        -176
+      ],
+      "webhookId": "4570d56a-eba9-4e78-a8a5-f8e348e0b5b2",
+      "credentials": {
+        "telegramApi": {
+          "id": "O8oeRzpmY587MhjL",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1ygecuB-AFm5T9iG6Zghjd1ZEgsOSn319E1gFcsksZKs",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "TUTORIAS",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "07b0c699-f05b-4a1e-a1a6-402a394bfcaf",
+      "name": "Sheets - Obtener Todas las Tutoría",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1840,
+        -176
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "N2CQnEiPq3HkPPqS",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger - Cada 30 min1": {
+      "main": [
+        [
+          {
+            "node": "Sheets - Obtener Todas las Tutoría",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter - Asignadas +45min1": {
+      "main": [
+        [
+          {
+            "node": "Code - Formatear Lista IDs Atascadas1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code - Formatear Lista IDs Atascadas1": {
+      "main": [
+        [
+          {
+            "node": "Telegram - Alerta a Coordinación1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sheets - Obtener Todas las Tutoría": {
+      "main": [
+        [
+          {
+            "node": "Filter - Asignadas +45min1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "d48dfc0e-a038-49c3-94ea-8b83d03d1cd4",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5ca3d943f31fd0bd55fb13b260310f3d96534ae2c9a6e10b090a343ea8f98d7f"
+  },
+  "nodeGroups": [],
+  "id": "nF3JGFmoITExjKvA",
+  "tags": []
+}
